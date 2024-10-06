@@ -16,23 +16,39 @@ public class Engine {
         System.out.println(0 + " - " + GAMES[0]);
     }
 
+    private static void printError() {
+        System.out.print("Incorrect input. Try again.");
+    }
+
     public static void startGame() {
         System.out.println("Please enter the game number and press Enter.");
         printGames();
 
         Scanner in = new Scanner(System.in);
         System.out.print("Your choice: ");
+        if (!in.hasNextInt()) {
+            printError();
+            return;
+        }
         int gameNum = in.nextInt();
+        if (gameNum < 0 || gameNum > GAMES.length - 1) {
+            printError();
+            return;
+        }
         in.nextLine();
 
-        if (gameNum == 0) return;
+        if (gameNum == 0) {
+            return;
+        }
 
         System.out.println("\nWelcome to the Brain Games!");
         System.out.print("May I have your name? ");
         String name = in.nextLine();
         System.out.println("Hello, " + name + "!");
 
-        if (gameNum == 1) return;
+        if (gameNum == 1) {
+            return;
+        }
 
         System.out.println(Games.getGreeting(gameNum));
 
@@ -46,8 +62,7 @@ public class Engine {
             if (myAnswer.equals(parameters[ANSWER])) {
                 ansCount++;
                 System.out.println("Correct!");
-            }
-            else {
+            } else {
                 System.out.println(String.format("'%s' is wrong answer ;(. Correct answer was '%s'.",
                         myAnswer, parameters[ANSWER]));
                 return;
