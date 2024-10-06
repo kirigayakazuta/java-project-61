@@ -15,6 +15,11 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
+// Добавляет ввод
+tasks.getByName("run", JavaExec::class) {
+    standardInput = System.`in`
+}
+
 application {
     mainClass = "hexlet.code.App"
 }
