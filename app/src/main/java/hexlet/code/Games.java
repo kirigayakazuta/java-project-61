@@ -3,6 +3,7 @@ package hexlet.code;
 import java.util.Scanner;
 
 public class Games {
+    public static final String[] GAMES = {"Exit", "Greet", "Even", "Calc", "GCD"};
     private static final int minValue = 1;
     private static final int maxValue = 100;
 
@@ -13,12 +14,14 @@ public class Games {
     public static String getGreeting(int gameNum) {
         if (gameNum == 2) return "Answer 'yes' if the number is even, otherwise answer 'no'.";
         else if (gameNum == 3) return "What is the result of the expression?";
+        else if (gameNum == 4) return "Find the greatest common divisor of given numbers.";
         return null;
     }
 
     public static String[] getQuestionAndAnswer(int gameNum) {
         if (gameNum == 2) return even();
-        else return calc();
+        else if (gameNum == 3) return calc();
+        else return GSD();
     }
 
     public static String[] even() {
@@ -47,5 +50,19 @@ public class Games {
             answer = a * b;
         }
         return new String[] { String.format("%d %s %d", a, operation, b), String.valueOf(answer) };
+    }
+
+    private static int findGSD(int a, int b) {
+        while (a != 0 && b != 0) {
+            if (a > b) a = a % b;
+            else b = b % a;
+        }
+        return Math.max(a, b);
+    }
+
+    public static String[] GSD() {
+        int a = getRandInt(minValue, maxValue);
+        int b = getRandInt(minValue, maxValue);
+        return new String[] { a + " " + b, String.valueOf(findGSD(a, b)) };
     }
 }

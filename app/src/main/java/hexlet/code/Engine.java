@@ -1,9 +1,10 @@
 package hexlet.code;
 
 import java.util.Scanner;
+import static hexlet.code.Games.GAMES;
 
 public class Engine {
-    private static final String[] GAMES = {"Exit", "Greet", "Even", "Calc"};
+
     private static final int MAX = 3;
     private static final int QUESTION = 0;
     private static final int ANSWER = 1;
