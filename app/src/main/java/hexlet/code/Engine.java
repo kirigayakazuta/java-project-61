@@ -22,32 +22,42 @@ public class Engine {
         System.out.print("Incorrect input. Try again.");
     }
 
-    public static void startGame() {
-        System.out.println("Please enter the game number and press Enter.");
-        printGames();
-
-        Scanner in = new Scanner(System.in);
+    private static int getGameNum(Scanner in) {
+        int gameNum;
         System.out.print("Your choice: ");
         if (!in.hasNextInt()) {
             printError();
-            return;
+            return 0;
         }
-        int gameNum = in.nextInt();
+        gameNum = in.nextInt();
         if (gameNum < 0 || gameNum > GAMES.length - 1) {
             printError();
-            return;
+            return 0;
         }
         in.nextLine();
 
-        if (gameNum == 0) {
-            return;
-        }
+        return gameNum;
+    }
 
+    private static String getName(Scanner in) {
         System.out.println("\nWelcome to the Brain Games!");
         System.out.print("May I have your name? ");
         String name = in.nextLine();
         System.out.println("Hello, " + name + "!");
+        return name;
+    }
 
+    public static void startGame() {
+        System.out.println("Please enter the game number and press Enter.");
+        printGames();
+        Scanner in = new Scanner(System.in);
+
+        int gameNum = getGameNum(in);
+        if (gameNum == 0) {
+            return;
+        }
+
+        String name = getName(in);
         if (gameNum == 1) {
             return;
         }
@@ -67,6 +77,7 @@ public class Engine {
             } else {
                 System.out.println(String.format("'%s' is wrong answer ;(. Correct answer was '%s'.",
                         myAnswer, parameters[ANSWER]));
+                System.out.println("Let's try again, " + name + "!");
                 return;
             }
         }
